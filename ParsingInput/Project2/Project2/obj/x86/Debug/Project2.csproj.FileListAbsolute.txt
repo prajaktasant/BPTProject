@@ -1,0 +1,5 @@
+c:\users\lureen\documents\visual studio 2010\Projects\Project2\Project2\bin\Debug\Project2.exe
+c:\users\lureen\documents\visual studio 2010\Projects\Project2\Project2\bin\Debug\Project2.pdb
+c:\users\lureen\documents\visual studio 2010\Projects\Project2\Project2\obj\x86\Debug\Project2.exe
+c:\users\lureen\documents\visual studio 2010\Projects\Project2\Project2\obj\x86\Debug\Project2.pdb
+C:\Users\lureen\Documents\Visual Studio 2010\Projects\Project2\Project2\obj\x86\Debug\Project2.csprojResolveAssemblyReference.cache
