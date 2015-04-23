@@ -11,11 +11,11 @@ namespace BPT.Implementation
     }
     public abstract class BPlusTreeNode
     {
-        public Object[] keys;
-        public int keyCount;
-        public BPlusTreeNode parentNode;
-        public BPlusTreeNode leftSibling;
-        public BPlusTreeNode rightSibling;
+        public Object[] keys;   //Student names
+        public int keyCount;    // Number of student names in the tree node
+        public BPlusTreeNode parentNode;    //Parent of the current node
+        public BPlusTreeNode leftSibling;   //left sibling of the current node
+        public BPlusTreeNode rightSibling;  //right sibling of the current node
 
         public BPlusTreeNode() 
         {
@@ -24,11 +24,20 @@ namespace BPT.Implementation
 		    this.leftSibling = null;
 		    this.rightSibling = null;
 	    }
+        /// <summary>
+        /// Returns the number of keys in a node.
+        /// </summary>
+        /// <returns></returns>
         public int getKeyCount()
         {
             return this.keyCount;
         }
    
+        /// <summary>
+        /// Returns the key at the specified index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public String getKey(int index)
         {
             return (String)this.keys[index];
@@ -39,16 +48,30 @@ namespace BPT.Implementation
             this.keys[index] = key;
         }
 
+        /// <summary>
+        /// Returns the parent node of the current node.
+        /// </summary>
+        /// <returns></returns>
         public BPlusTreeNode getParent()
         {
             return this.parentNode;
         }
 
+        /// <summary>
+        /// Sets the specified node as the parent of the current node.
+        /// </summary>
+        /// <param name="parent"></param>
         public void setParent(BPlusTreeNode parent)
         {
             this.parentNode = parent;
         }
 
+        /// <summary>
+        /// There are two types of B+ tree nodes
+        /// 1. Internal Node
+        /// 2. Leaf Node
+        /// </summary>
+        /// <returns>The type of leaf node</returns>
         public abstract BplusTreeNodeType getNodeType();
 
         /// <summary>
@@ -60,7 +83,7 @@ namespace BPT.Implementation
         public abstract int search(string key);
 
         /// <summary>
-        /// Checks the Overflow condition.
+        /// Checks the Overflow condition. Overflow condition occurs if the node is full. There is no space to enter a new key.
         /// </summary>
         /// <returns></returns>
         public bool doesNodeOverflow()
@@ -69,7 +92,7 @@ namespace BPT.Implementation
         }
 
         /// <summary>
-        /// Handles the overflow
+        /// Handles if the Node is full and we try to insert an additional key in the node.
         /// </summary>
         /// <returns></returns>
         public BPlusTreeNode handleOverflow()
@@ -85,17 +108,20 @@ namespace BPT.Implementation
             }
             newNode.setParent(this.getParent());
 
-            // maintain links of sibling nodes
+            // References to the Sibling nodes are maintained after splitting the node.
             newNode.setLeftSibling(this);
             newNode.setRightSibling(this.rightSibling);
             if (this.getRightSibling() != null)
                 this.getRightSibling().setLeftSibling(newNode);
             this.setRightSibling(newNode);
 
-            // push up a key to parent internal node
             return this.getParent().pushKeyToParent(pushUpKey, this, newNode);
         }
 
+        /// <summary>
+        /// Splits the node in case of Overflow
+        /// </summary>
+        /// <returns></returns>
         protected abstract BPlusTreeNode splitNode();
 
         protected abstract BPlusTreeNode pushKeyToParent(String key, BPlusTreeNode leftChild, BPlusTreeNode rightNode);
@@ -120,6 +146,10 @@ namespace BPT.Implementation
             return this.getKeyCount() > 1;
         }
 
+        /// <summary>
+        /// Returns the left sibling if current node has a left sibling and their parent is same.
+        /// </summary>
+        /// <returns></returns>
         public BPlusTreeNode getLeftSibling()
         {
             if (this.leftSibling != null && this.leftSibling.getParent() == this.getParent())
@@ -132,6 +162,10 @@ namespace BPT.Implementation
             this.leftSibling = sibling;
         }
 
+        /// <summary>
+        /// Returns the right sibling node if current node has a right sibling and their parent is same.
+        /// </summary>
+        /// <returns></returns>
         public BPlusTreeNode getRightSibling()
         {
             if (this.rightSibling != null && this.rightSibling.getParent() == this.getParent())
@@ -146,7 +180,7 @@ namespace BPT.Implementation
 
         /// <summary>
         /// Gets the right leaf node key by the traversing using the last pointer (11th pointer) of the leaf node.
-        /// Used for listing all the leaf node keys by the List() function.
+        /// Used for listing all the leaf node keys by the List() function. The parent need not be same in this case.
         /// </summary>
         /// <returns></returns>
         public BPlusTreeNode getNextRightLeafNode()
@@ -180,7 +214,7 @@ namespace BPT.Implementation
                 return null;
             }
 
-            // Can not borrow a key from any sibling, then do fusion with sibling
+            // If can not borrow a key from any sibling, then merge with the sibling
             if (leftSibling != null)
             {
                 return this.getParent().performChildrenMerge(leftSibling, this);
@@ -192,11 +226,11 @@ namespace BPT.Implementation
         }
         public abstract void mergeWithSibling(String dropKey, BPlusTreeNode rightSibling);
 
-        protected abstract void performChildrenTransfer(BPlusTreeNode borrower, BPlusTreeNode lender, int borrowIndex);
+        protected abstract void performChildrenTransfer(BPlusTreeNode borrowerNode, BPlusTreeNode lenderNode, int borrowIndex);
 
-        public abstract String transferFromSibling(String dropKey, BPlusTreeNode sibling, int borrowIndex);
+        public abstract String transferFromSibling(String dropKey, BPlusTreeNode siblingNode, int borrowIndex);
 
-        protected abstract BPlusTreeNode performChildrenMerge(BPlusTreeNode leftChild, BPlusTreeNode rightChild);
+        protected abstract BPlusTreeNode performChildrenMerge(BPlusTreeNode leftChildNode, BPlusTreeNode rightChildNode);
 
 
     }

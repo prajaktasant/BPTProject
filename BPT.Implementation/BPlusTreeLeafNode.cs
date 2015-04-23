@@ -6,8 +6,8 @@ namespace BPT.Implementation
 {
     public class BPlusTreeLeafNode : BPlusTreeNode
     {
-        public static int LEAFNODEORDER = 2;
-        public Object[] values;
+        public static int LEAFNODEORDER = 2; //Maximum number of keys a leaf Node can contain
+        public Object[] values; // Data in the leaf node for the corressponding keys
 
         public BPlusTreeLeafNode()
         {

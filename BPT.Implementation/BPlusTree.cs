@@ -14,11 +14,11 @@ namespace BPT.Implementation
         }
 
         /// <summary>
-        /// Inserts a key if not present in the B plus tree and should be less than 32 characters.
+        /// Inserts a student name if not present in the B plus tree and should be less than 32 characters.
         /// Also, attaches 224 bytes of confidential information that initially contains 224 blank characters.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="val"></param>
+        /// <param name="key">Student name</param>
+        /// <param name="val">Array of 224 Empty charaters</param>
         public void Insert(String key, char[] val)
         {
             if (key.Length <= 32)
@@ -54,8 +54,8 @@ namespace BPT.Implementation
         /// <summary>
         /// Given a key, searches and returns the corresponding value
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
+        /// <param name="key">student name</param>
+        /// <returns>Confidential Information if Present else empty string</returns>
         public String Search(String key)
         {
 
@@ -72,8 +72,8 @@ namespace BPT.Implementation
         }
 
         /// <summary>
-        /// Deletes the specified key. The underflow condition and handling the underflow is different from the normal B+ trees.
-        /// The node is deleted only if it is empty.
+        /// Deletes the specified student record. The underflow condition and handling the underflow is different from the normal B+ trees.
+        /// The node is deleted only if it is empty. Underflow does not occur if there is atleat one key present in the leaf node.
         /// </summary>
         /// <param name="key"></param>
         public void Delete(String key)
@@ -116,7 +116,7 @@ namespace BPT.Implementation
         }
 
         /// <summary>
-        /// Lists all the student names(keys) using the 11th pointer of the leaf nodes.
+        /// Lists all the student names(keys) using the last pointer(11th Pointer for this project) of the leaf nodes.
         /// </summary>
         /// <returns></returns>
         public List<string> List()
@@ -130,7 +130,7 @@ namespace BPT.Implementation
         /// 1. Total number of records in all the leaf nodes.
         /// 2. Number of Blocks occupied.
         /// 3. Depth of the tree.
-        /// 4. First and last keys of all the internal B+ tree nodes.
+        /// 4. First and last keys of all the internal B+ tree nodes(excludes the leaf nodes).
         /// </summary>
         /// <returns></returns>
         public List<string> Snapshot()
@@ -160,7 +160,7 @@ namespace BPT.Implementation
         }
 
         /// <summary>
-        /// Return the total number of records in the tree.
+        /// Return the total number of records in the leaf nodes(table).
         /// </summary>
         /// <returns></returns>
         public int getNumberOfRecords()
@@ -179,7 +179,7 @@ namespace BPT.Implementation
         }
 
         /// <summary>
-        /// Gets the left modt leaf node. Used for listing all the leaf node records starting with the leftmost leaf node.
+        /// Gets the left most leaf node. Used for listing all the leaf node records starting with the leftmost leaf node.
         /// </summary>
         /// <returns></returns>
         private BPlusTreeLeafNode findLeftMostLeafNode()

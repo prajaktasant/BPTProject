@@ -8,3 +8,13 @@ C:\Swara_UOH\DatabaseSystems\Homework2\BPT\BPT.UI\bin\Debug\BPT.Implementation.d
 C:\Swara_UOH\DatabaseSystems\Homework2\BPT\BPT.UI\bin\Debug\BPT.Implementation.pdb
 C:\Swara_UOH\DatabaseSystems\Homework2\BPT\BPT.UI\obj\Debug\BPT.UI.csprojResolveAssemblyReference.cache
 C:\Swara_UOH\DatabaseSystems\Homework2\BPT\BPT.UI\obj\Debug\BPT.UI.Form1.resources
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\bin\Debug\BPT.UI.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\bin\Debug\BPT.UI.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\bin\Debug\BPT.Implementation.dll
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\bin\Debug\BPT.Implementation.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.csprojResolveAssemblyReference.cache
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.Form1.resources
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.Properties.Resources.resources
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.csproj.GenerateResource.Cache
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.pdb

@@ -6,14 +6,20 @@ namespace BPT.Implementation
 {
     public class BPlusTreeInternalNode: BPlusTreeNode
     {
-        protected static int INTERNALORDER =2;
-	    protected Object[] children;
+        protected static int INTERNALORDER =2; //Maximum number of keys an Internal Node can contain.
+	    protected Object[] children;    //Number of children an internal node has.
 
         public BPlusTreeInternalNode()
         {
             this.keys = new Object[INTERNALORDER + 1];
             this.children = new Object[INTERNALORDER + 2];
 	    }
+
+        /// <summary>
+        /// Returns the child node of the current node at the specified index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
 	    public BPlusTreeNode getChild(int index) {
 		    return (BPlusTreeNode)this.children[index];
 	    }
@@ -23,11 +29,16 @@ namespace BPT.Implementation
 		    if (child != null)
 			    child.setParent(this);
 	    }
-	
+	    
 	    public override BplusTreeNodeType getNodeType() {
 		    return BplusTreeNodeType.InternalNode;
 	    }
-	
+
+	    /// <summary>
+	    /// Returns the index of the specified key.
+	    /// </summary>
+	    /// <param name="key"></param>
+	    /// <returns></returns>
 	    public override int search(String key) {
 		    int index = 0;
 		    for (index = 0; index < this.getKeyCount(); ++index) {
@@ -114,7 +125,7 @@ namespace BPT.Implementation
 	    }
 	
 	/// <summary>
-    /// Below code is used to for deletion Operation.
+    /// Deletes a key at a specified index and adjusts the node.
 	/// </summary>
 	/// <param name="index"></param>
 	private void deleteAt(int index) {
@@ -134,19 +145,19 @@ namespace BPT.Implementation
     /// <param name="borrower"></param>
     /// <param name="lender"></param>
     /// <param name="borrowIndex"></param>
-	protected override void performChildrenTransfer(BPlusTreeNode borrower, BPlusTreeNode lender, int borrowIndex) 
+	protected override void performChildrenTransfer(BPlusTreeNode borrower, BPlusTreeNode lenderNode, int borrowIndex) 
     {
 		int borrowerChildIndex = 0;
 		while (borrowerChildIndex < this.getKeyCount() + 1 && this.getChild(borrowerChildIndex) != borrower)
 			++borrowerChildIndex;
 		
 		if (borrowIndex == 0) {
-			String pushUpKey = borrower.transferFromSibling(this.getKey(borrowerChildIndex), lender, borrowIndex);
+			String pushUpKey = borrower.transferFromSibling(this.getKey(borrowerChildIndex), lenderNode, borrowIndex);
 			this.setKey(borrowerChildIndex, pushUpKey);
 		}
 		else {
-			String upKey = borrower.transferFromSibling(this.getKey(borrowerChildIndex - 1), lender, borrowIndex);
-			this.setKey(borrowerChildIndex - 1, upKey);
+			String pushUpKey = borrower.transferFromSibling(this.getKey(borrowerChildIndex - 1), lenderNode, borrowIndex);
+            this.setKey(borrowerChildIndex - 1, pushUpKey);
 		}
 	}
 	
@@ -155,18 +166,11 @@ namespace BPT.Implementation
 		int index = 0;
 		while (index < this.getKeyCount() && this.getChild(index) != leftChild)
 			++index;
-		String dropKey = this.getKey(index);
-		
-		// merge children and the drop key into the left child node
-		leftChild.mergeWithSibling(dropKey, rightChild);
-		
-		// remove the drop key, keep the left child and abandon the right child
+		String dropKey = this.getKey(index);		
+		leftChild.mergeWithSibling(dropKey, rightChild);		
 		this.deleteAt(index);
-		
-		// check whether need to propagate borrow or merge to parent
-		if (this.doesNodeUnderflow()) {
+				if (this.doesNodeUnderflow()) {
 			if (this.getParent() == null) {
-				// current node is root, only remove keys or delete the whole root node
 				if (this.getKeyCount() == 0) {
 					leftChild.setParent(null);
 					return leftChild;
@@ -174,8 +178,7 @@ namespace BPT.Implementation
 				else {
 					return null;
 				}
-			}
-			
+			}			
 			return this.handleUnderflow();
 		}
 		
@@ -203,14 +206,13 @@ namespace BPT.Implementation
 			rightSiblingNode.rightSibling.setLeftSibling(this);
 	}
 	
-	public override String transferFromSibling(String sinkKey, BPlusTreeNode sibling, int borrowIndex) {
+	public override String transferFromSibling(String dropKey, BPlusTreeNode sibling, int borrowIndex) {
         BPlusTreeInternalNode siblingNode = (BPlusTreeInternalNode)sibling;
 		
 		String upKey = null;
 		if (borrowIndex == 0) {
-			// borrow the first key from right sibling, append it to tail
 			int index = this.getKeyCount();
-			this.setKey(index, sinkKey);
+			this.setKey(index, dropKey);
 			this.setChild(index + 1, siblingNode.getChild(borrowIndex));			
 			this.keyCount += 1;
 			
@@ -218,13 +220,16 @@ namespace BPT.Implementation
 			siblingNode.deleteAt(borrowIndex);
 		}
 		else {
-			// borrow the last key from left sibling, insert it to head
-			this.insertAt(0, sinkKey, siblingNode.getChild(borrowIndex + 1), this.getChild(0));
+			this.insertAt(0, dropKey, siblingNode.getChild(borrowIndex + 1), this.getChild(0));
 			upKey = siblingNode.getKey(borrowIndex);
 			siblingNode.deleteAt(borrowIndex);
 		}
 		
-		return upKey;
+		return pushUpKey;
 	}
+
+    public BPlusTreeNode lenderNode { get; set; }
+
+    public string pushUpKey { get; set; }
     }
 }
