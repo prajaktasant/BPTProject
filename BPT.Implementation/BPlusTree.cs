@@ -139,7 +139,7 @@ namespace BPT.Implementation
             snapshotList.Add(getNumberOfRecords().ToString());
             snapshotList.Add(getNumberOfBlocks().ToString());
             snapshotList.Add(getDepth().ToString());
-            BFSTreeTraversal();
+            List<string> bfsTraversal = BFSTreeTraversal();
             return snapshotList;
         }
 
@@ -211,16 +211,22 @@ namespace BPT.Implementation
         /// Used to get the first and last keys of all internal B+ tree nodes. 
         /// Breadth First Search Algorithm is used for tree traversal.
         /// </summary>
-        private void BFSTreeTraversal()
+        private List<string> BFSTreeTraversal()
         {
             Queue<BPlusTreeInternalNode> q = new Queue<BPlusTreeInternalNode>();
+            List<string> firstAndLast = new List<string>();
+            int j = 0;
             q.Enqueue((BPlusTreeInternalNode)this.rootnode);
             {
                 while (q.Count > 0)
                 {
                     BPlusTreeInternalNode n = q.Dequeue();
+                    firstAndLast.Add("B tree Node : " + j);
+                    j++;
                     String first = n.getKey(0);
+                    firstAndLast.Add(first);
                     String last = n.getKey(n.getKeyCount()-1);
+                    firstAndLast.Add(last);
                     for (int i = 0; i < n.getKeyCount() + 1; i++)
                     {
                         if (n.getChild(i) != null && n.getChild(i).getNodeType() == BplusTreeNodeType.InternalNode)
@@ -228,6 +234,7 @@ namespace BPT.Implementation
                     }
                 }
             }
+            return firstAndLast;
         }
 
     }

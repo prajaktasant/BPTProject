@@ -1,0 +1,23 @@
+c:\users\lureen\documents\visual studio 2010\Projects\Project2\Project2\bin\Debug\Project2.exe
+c:\users\lureen\documents\visual studio 2010\Projects\Project2\Project2\bin\Debug\Project2.pdb
+c:\users\lureen\documents\visual studio 2010\Projects\Project2\Project2\obj\x86\Debug\Project2.exe
+c:\users\lureen\documents\visual studio 2010\Projects\Project2\Project2\obj\x86\Debug\Project2.pdb
+C:\Users\lureen\Documents\Visual Studio 2010\Projects\Project2\Project2\obj\x86\Debug\Project2.csprojResolveAssemblyReference.cache
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\ParsingInput\Project2\Project2\obj\x86\Debug\Project2.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\ParsingInput\Project2\Project2\obj\x86\Debug\Project2.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\ParsingInput\Project2\Project2\bin\Debug\Project2.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\ParsingInput\Project2\Project2\bin\Debug\Project2.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\ParsingInput\Project2\Project2\obj\x86\Debug\Project2.csprojResolveAssemblyReference.cache
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\ParsingInput\Project2\Project2\bin\Debug\BPT.Implementation.dll
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\ParsingInput\Project2\Project2\bin\Debug\BPT.UI.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\ParsingInput\Project2\Project2\bin\Debug\BPT.Implementation.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\ParsingInput\Project2\Project2\bin\Debug\BPT.UI.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\Project2\obj\x86\Debug\Project2.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\Project2\obj\x86\Debug\Project2.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\Project2\bin\Debug\Project2.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\Project2\bin\Debug\Project2.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\Project2\bin\Debug\BPT.Implementation.dll
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\Project2\bin\Debug\BPT.UI.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\Project2\bin\Debug\BPT.Implementation.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\Project2\bin\Debug\BPT.UI.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\Project2\obj\x86\Debug\Project2.csprojResolveAssemblyReference.cache

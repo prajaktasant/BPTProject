@@ -8,8 +8,8 @@
     <ProjectGuid>{4BCF4586-F13B-4DE5-A8A1-C0A05B5A8BDC}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Project2</RootNamespace>
-    <AssemblyName>Project2</AssemblyName>
+    <RootNamespace>BPT.ParseInput</RootNamespace>
+    <AssemblyName>BPT.ParseInput</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -43,10 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dataWithAction.cs" />
     <Compile Include="parsingFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BPT.Implementation\BPT.Implementation.csproj">
+      <Project>{7148a603-4470-4624-a2fe-0fd02d903834}</Project>
+      <Name>BPT.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BPT.UI\BPT.UI.csproj">
+      <Project>{8fd03959-5dc6-44e7-9115-ca6597825b51}</Project>
+      <Name>BPT.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

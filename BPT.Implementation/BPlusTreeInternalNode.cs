@@ -138,6 +138,28 @@ namespace BPT.Implementation
 		this.setChild(i + 1, null);
 		--this.keyCount;
 	}
+
+    public override void mergeWithSibling(String sinkKey, BPlusTreeNode rightSibling)
+    {
+        BPlusTreeInternalNode rightSiblingNode = (BPlusTreeInternalNode)rightSibling;
+
+        int j = this.getKeyCount();
+        this.setKey(j++, sinkKey);
+
+        for (int i = 0; i < rightSiblingNode.getKeyCount(); ++i)
+        {
+            this.setKey(j + i, rightSiblingNode.getKey(i));
+        }
+        for (int i = 0; i < rightSiblingNode.getKeyCount() + 1; ++i)
+        {
+            this.setChild(j + i, rightSiblingNode.getChild(i));
+        }
+        this.keyCount += 1 + rightSiblingNode.getKeyCount();
+
+        this.setRightSibling(rightSiblingNode.rightSibling);
+        if (rightSiblingNode.rightSibling != null)
+            rightSiblingNode.rightSibling.setLeftSibling(this);
+    }
 	
     /// <summary>
     /// Borrows a key either from Right Sibling or Left Sibling.
@@ -160,7 +182,32 @@ namespace BPT.Implementation
             this.setKey(borrowerChildIndex - 1, pushUpKey);
 		}
 	}
-	
+
+    public override String transferFromSibling(String dropKey, BPlusTreeNode sibling, int borrowIndex)
+    {
+        BPlusTreeInternalNode siblingNode = (BPlusTreeInternalNode)sibling;
+
+        String pushUpKey = null;
+        if (borrowIndex == 0)
+        {
+            int index = this.getKeyCount();
+            this.setKey(index, dropKey);
+            this.setChild(index + 1, siblingNode.getChild(borrowIndex));
+            this.keyCount += 1;
+
+            pushUpKey = siblingNode.getKey(0);
+            siblingNode.deleteAt(borrowIndex);
+        }
+        else
+        {
+            this.insertAt(0, dropKey, siblingNode.getChild(borrowIndex + 1), this.getChild(0));
+            pushUpKey = siblingNode.getKey(borrowIndex);
+            siblingNode.deleteAt(borrowIndex);
+        }
+
+        return pushUpKey;
+    }
+
 	protected override BPlusTreeNode performChildrenMerge(BPlusTreeNode leftChild, BPlusTreeNode rightChild)
     {
 		int index = 0;
@@ -186,50 +233,6 @@ namespace BPT.Implementation
 	}
 	
 	
-	public override void mergeWithSibling(String sinkKey, BPlusTreeNode rightSibling)
-    {
-		BPlusTreeInternalNode rightSiblingNode = (BPlusTreeInternalNode)rightSibling;
-		
-		int j = this.getKeyCount();
-		this.setKey(j++, sinkKey);
-		
-		for (int i = 0; i < rightSiblingNode.getKeyCount(); ++i) {
-			this.setKey(j + i, rightSiblingNode.getKey(i));
-		}
-		for (int i = 0; i < rightSiblingNode.getKeyCount() + 1; ++i) {
-			this.setChild(j + i, rightSiblingNode.getChild(i));
-		}
-		this.keyCount += 1 + rightSiblingNode.getKeyCount();
-		
-		this.setRightSibling(rightSiblingNode.rightSibling);
-		if (rightSiblingNode.rightSibling != null)
-			rightSiblingNode.rightSibling.setLeftSibling(this);
-	}
 	
-	public override String transferFromSibling(String dropKey, BPlusTreeNode sibling, int borrowIndex) {
-        BPlusTreeInternalNode siblingNode = (BPlusTreeInternalNode)sibling;
-		
-		String upKey = null;
-		if (borrowIndex == 0) {
-			int index = this.getKeyCount();
-			this.setKey(index, dropKey);
-			this.setChild(index + 1, siblingNode.getChild(borrowIndex));			
-			this.keyCount += 1;
-			
-			upKey = siblingNode.getKey(0);
-			siblingNode.deleteAt(borrowIndex);
-		}
-		else {
-			this.insertAt(0, dropKey, siblingNode.getChild(borrowIndex + 1), this.getChild(0));
-			upKey = siblingNode.getKey(borrowIndex);
-			siblingNode.deleteAt(borrowIndex);
-		}
-		
-		return pushUpKey;
-	}
-
-    public BPlusTreeNode lenderNode { get; set; }
-
-    public string pushUpKey { get; set; }
     }
 }

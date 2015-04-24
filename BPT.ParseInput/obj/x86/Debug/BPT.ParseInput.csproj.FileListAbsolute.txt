@@ -1,0 +1,9 @@
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.ParseInput\bin\Debug\BPT.ParseInput.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.ParseInput\bin\Debug\BPT.ParseInput.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.ParseInput\bin\Debug\BPT.Implementation.dll
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.ParseInput\bin\Debug\BPT.UI.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.ParseInput\bin\Debug\BPT.Implementation.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.ParseInput\bin\Debug\BPT.UI.pdb
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.ParseInput\obj\x86\Debug\BPT.ParseInput.csprojResolveAssemblyReference.cache
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.ParseInput\obj\x86\Debug\BPT.ParseInput.exe
+C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.ParseInput\obj\x86\Debug\BPT.ParseInput.pdb
