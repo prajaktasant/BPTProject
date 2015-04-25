@@ -51,8 +51,13 @@ namespace BPT.ParseInput
                                 {
                                     Console.WriteLine(e.Message);
                                 }
+                                line = file.ReadLine();
                             }
-                            line = file.ReadLine();
+                            else
+                            {
+                                line = file.ReadLine();
+                            }
+
                         }
                         continue;
                     }
@@ -91,8 +96,13 @@ namespace BPT.ParseInput
                                 {
                                     Console.WriteLine(e.Message);
                                 }
+                                line = file.ReadLine();
                             }
-                            line = file.ReadLine();
+                            else
+                            {
+                                line = file.ReadLine();
+                            }
+
                         }
                         continue;
                     }
@@ -133,8 +143,13 @@ namespace BPT.ParseInput
                                     Console.WriteLine(e.Message);
                                 }
 
+                                line = file.ReadLine();
                             }
-                            line = file.ReadLine();
+                            else
+                            {
+                                line = file.ReadLine();
+                            }
+
                         }
                         continue;
                     }
@@ -157,24 +172,26 @@ namespace BPT.ParseInput
                                 {
                                     Console.WriteLine(e.Message);
                                 }
+                                line = file.ReadLine();
                             }
-                            line = file.ReadLine();
+                            else
+                            {
+                                line = file.ReadLine();
+                            }
+
                         }
                         continue;
                     }
                     else
                     {
-                        Console.WriteLine("Invalid Operation in the file. \nPress Enter to exit");
-                        Console.ReadLine();
+                        throw new Exception("Invalid Operation in the file");
                     }
                 }
                 Console.ReadLine();
             }
             else
             {
-                Console.WriteLine("No Such file,check your path please!. \nPress Enter to Exit");
-                Console.ReadLine();
-
+                throw new Exception("No Such file,check your path please!");
             }
         }
     }
