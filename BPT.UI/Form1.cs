@@ -28,6 +28,8 @@ namespace BPT.UI
             tree.Insert("aaa", new char[224]);
             tree.Insert("mno", new char[224]);
             tree.Insert("mat", new char[224]);
+            List<string> snapshotList = tree.Snapshot();
+            List<string> firstAndLast = tree.BFSTreeTraversal();
             List<string> keylist = tree.List();
             tree.Delete("bob");
             tree.Delete("mno");
@@ -44,7 +46,6 @@ namespace BPT.UI
             tree.Insert("gun", new char[224]);
             tree.Insert("fun", new char[224]);
             List<string> keylist1 = tree.List();
-            List<string> snapshotList = tree.Snapshot();
             String result = tree.Search("bob");
         }
     }

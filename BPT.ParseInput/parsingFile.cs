@@ -62,11 +62,17 @@ namespace BPT.ParseInput
                         try
                         {
                             List<string> snapshotList = tree.Snapshot();
-                            Console.WriteLine("Number of Records: " + snapshotList.ToArray()[0]);
-                            Console.WriteLine("Number of Blocks: " + snapshotList.ToArray()[1]);
-                            Console.WriteLine("Depth: " + snapshotList.ToArray()[2]);
+                            Console.WriteLine("\nNumber of Records: " + snapshotList.ToArray()[0]+"\n");
+                            Console.WriteLine("Number of Blocks: " + snapshotList.ToArray()[1]+"\n");
+                            Console.WriteLine("Depth: " + snapshotList.ToArray()[2]+"\n");
+                            Console.WriteLine("First and Last keys of all internal B + Tree Nodes: ");
+                            List<string> firstAndLast = tree.BFSTreeTraversal();
+                            foreach(string key in firstAndLast)
+                            {
+                                Console.WriteLine(key);
+                            }
                         }
-                        catch (Exception e)
+                        catch (Exception e) 
                         {
                             Console.WriteLine(e.Message);
                         }

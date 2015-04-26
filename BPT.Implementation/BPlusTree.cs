@@ -40,13 +40,13 @@ namespace BPT.Implementation
 
                 else
                 {
-                    throw new Exception("Key already present. Cannot insert same key");
+                    throw new Exception(key+" already present. Cannot insert same key");
                 }
             }
 
             else
             {
-                throw new Exception("Key cannot have more than 32 characters");
+                throw new Exception(key+" cannot be inserted. Key cannot have more than 32 characters");
             }
 
         }
@@ -63,7 +63,7 @@ namespace BPT.Implementation
             int index = leafnode.search(key);
             if (index == -1)
             {
-                throw new Exception("Key not found");
+                throw new Exception(key+" not found");
             }
             else
             {
@@ -91,7 +91,7 @@ namespace BPT.Implementation
             }
             else
             {
-                throw new Exception("Record not found");
+                throw new Exception(key+ " not found");
             }
         }
 
@@ -139,7 +139,6 @@ namespace BPT.Implementation
             snapshotList.Add(getNumberOfRecords().ToString());
             snapshotList.Add(getNumberOfBlocks().ToString());
             snapshotList.Add(getDepth().ToString());
-            List<string> bfsTraversal = BFSTreeTraversal();
             return snapshotList;
         }
 
@@ -147,7 +146,7 @@ namespace BPT.Implementation
         /// Returns the depth of the tree.
         /// </summary>
         /// <returns></returns>
-        public int getDepth()
+        private int getDepth()
         {
             BPlusTreeNode node = this.rootnode;
             int count = 1;
@@ -163,7 +162,7 @@ namespace BPT.Implementation
         /// Return the total number of records in the leaf nodes(table).
         /// </summary>
         /// <returns></returns>
-        public int getNumberOfRecords()
+        private int getNumberOfRecords()
         {
             return List().Count;
         }
@@ -172,7 +171,7 @@ namespace BPT.Implementation
         /// Returns the number of blocks occupied.
         /// </summary>
         /// <returns></returns>
-        public double getNumberOfBlocks()
+        private double getNumberOfBlocks()
         {
             double blocks = Math.Ceiling(System.Convert.ToDouble(getNumberOfRecords())/ 4);
             return blocks;
@@ -211,7 +210,7 @@ namespace BPT.Implementation
         /// Used to get the first and last keys of all internal B+ tree nodes. 
         /// Breadth First Search Algorithm is used for tree traversal.
         /// </summary>
-        private List<string> BFSTreeTraversal()
+        public List<string> BFSTreeTraversal()
         {
             Queue<BPlusTreeInternalNode> q = new Queue<BPlusTreeInternalNode>();
             List<string> firstAndLast = new List<string>();
@@ -224,9 +223,9 @@ namespace BPT.Implementation
                     firstAndLast.Add("B tree Node : " + j);
                     j++;
                     String first = n.getKey(0);
-                    firstAndLast.Add(first);
+                    firstAndLast.Add("First Key: "+first);
                     String last = n.getKey(n.getKeyCount()-1);
-                    firstAndLast.Add(last);
+                    firstAndLast.Add("Last Key: "+last+"\n");
                     for (int i = 0; i < n.getKeyCount() + 1; i++)
                     {
                         if (n.getChild(i) != null && n.getChild(i).getNodeType() == BplusTreeNodeType.InternalNode)
