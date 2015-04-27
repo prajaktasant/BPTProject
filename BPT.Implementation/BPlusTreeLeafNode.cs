@@ -6,13 +6,13 @@ namespace BPT.Implementation
 {
     public class BPlusTreeLeafNode : BPlusTreeNode
     {
-        public static int LEAFNODEORDER = 2; //Maximum number of keys a leaf Node can contain
-        public Object[] values; // Data in the leaf node for the corressponding keys
+        public static int LEAFNODEORDER = Constants.LEAF_ORDER; //Maximum number of keys a leaf Node can contain
+        public String[] values; // Data in the leaf node for the corressponding keys
 
         public BPlusTreeLeafNode()
         {
-            this.keys = new Object[LEAFNODEORDER + 1];
-            this.values = new Object[LEAFNODEORDER + 1];
+            this.keys = new String[LEAFNODEORDER + 1];
+            this.values = new String[LEAFNODEORDER + 1];
         }
 
         public String getValue(int index)
@@ -145,6 +145,20 @@ namespace BPT.Implementation
                 nextnode = (BPlusTreeLeafNode)nextnode.getNextRightLeafNode();
             }
             return keylist;
+        }
+
+
+        public double calculateNumberOfBlocks()
+        {
+            BPlusTreeLeafNode nextnode = this;
+            double nodeBlocks = 0;
+            while (nextnode != null)
+            {
+                double keyCount = nextnode.getKeyCount();
+                nodeBlocks = nodeBlocks + Math.Ceiling(System.Convert.ToDouble(keyCount / Constants.RECORDS_PER_BLOCK));             
+                nextnode = (BPlusTreeLeafNode)nextnode.getNextRightLeafNode();
+            }
+            return nodeBlocks;
         }
 
         /// <summary>

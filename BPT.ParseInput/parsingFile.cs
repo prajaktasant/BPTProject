@@ -175,6 +175,7 @@ namespace BPT.ParseInput
                     }
                 }
                 Console.ReadLine();
+
             }
             else
             {
@@ -183,6 +184,7 @@ namespace BPT.ParseInput
 
             }
         }
+
     }
 }
 

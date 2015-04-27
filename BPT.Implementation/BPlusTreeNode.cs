@@ -24,6 +24,17 @@ namespace BPT.Implementation
 		    this.leftSibling = null;
 		    this.rightSibling = null;
 	    }
+
+        public BplusTreeNodeType BplusTreeNodeType
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
         /// <summary>
         /// Returns the number of keys in a node.
         /// </summary>

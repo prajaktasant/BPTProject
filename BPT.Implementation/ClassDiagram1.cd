@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BPT.Implementation.BPlusTree">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAQCAAgAIAAAAgAAAAAAAEAAAAAAAAIEIAgAAM=</HashCode>
+      <FileName>BPlusTree.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="BPlusTreeNode" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BPT.Implementation.BPlusTreeInternalNode">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGIAAABAgAAAAQAAAAICAACIAAAAAIgACCAAAAAAAA=</HashCode>
+      <FileName>BPlusTreeInternalNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BPT.Implementation.BPlusTreeLeafNode">
+    <Position X="5.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGIAgABAgBAACAAAAIICQAAQAAAACIAACCAAAAEAAA=</HashCode>
+      <FileName>BPlusTreeLeafNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BPT.Implementation.BPlusTreeNode">
+    <Position X="2.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAOIAAABggSIAAiGBCAIAAAQEAAAAAIgACAAJABAQBA=</HashCode>
+      <FileName>BPlusTreeNode.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="BplusTreeNodeType" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="BPT.Implementation.BplusTreeNodeType">
+    <Position X="5.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BPlusTreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

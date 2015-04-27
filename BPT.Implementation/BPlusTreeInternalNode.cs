@@ -6,7 +6,7 @@ namespace BPT.Implementation
 {
     public class BPlusTreeInternalNode: BPlusTreeNode
     {
-        protected static int INTERNALORDER =2; //Maximum number of keys an Internal Node can contain.
+        protected static int INTERNALORDER =Constants.INTERNAL_ORDER; //Maximum number of keys an Internal Node can contain.
 	    protected Object[] children;    //Number of children an internal node has.
 
         public BPlusTreeInternalNode()

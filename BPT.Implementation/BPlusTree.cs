@@ -13,6 +13,17 @@ namespace BPT.Implementation
             this.rootnode = new BPlusTreeLeafNode();
         }
 
+        public BPlusTreeNode BPlusTreeNode
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Inserts a student name if not present in the B plus tree and should be less than 32 characters.
         /// Also, attaches 224 bytes of confidential information that initially contains 224 blank characters.
@@ -173,7 +184,9 @@ namespace BPT.Implementation
         /// <returns></returns>
         private double getNumberOfBlocks()
         {
-            double blocks = Math.Ceiling(System.Convert.ToDouble(getNumberOfRecords())/ 4);
+            BPlusTreeLeafNode leafnode = this.findLeftMostLeafNode();
+            double blocks = leafnode.calculateNumberOfBlocks();
+            //double blocks = Math.Ceiling(System.Convert.ToDouble(getNumberOfRecords())/ 4);
             return blocks;
         }
 
