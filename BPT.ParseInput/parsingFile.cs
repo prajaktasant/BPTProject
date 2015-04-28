@@ -35,7 +35,9 @@ namespace BPT.ParseInput
                     }
                     if (line == "*INSERT")
                     {
-                        Console.WriteLine("\n*INSERT");
+                        Console.WriteLine("-----------------------------------------------------");
+                        Console.WriteLine("*INSERT");
+                        Console.WriteLine("-----------------------------------------------------");
                         line = file.ReadLine();
                         while (!file.EndOfStream && !line.StartsWith("*"))
                         {
@@ -58,7 +60,9 @@ namespace BPT.ParseInput
                     }
                     if (line == "*SNAPSHOT")
                     {
-                        Console.WriteLine("\n*SNAPSHOT");
+                        Console.WriteLine("-----------------------------------------------------");
+                        Console.WriteLine("*SNAPSHOT");
+                        Console.WriteLine("-----------------------------------------------------");
                         try
                         {
                             List<string> snapshotList = tree.Snapshot();
@@ -81,7 +85,9 @@ namespace BPT.ParseInput
                     }
                     if (line == "*SEARCH")
                     {
-                        Console.WriteLine("\n*SEARCH");
+                        Console.WriteLine("-----------------------------------------------------");
+                        Console.WriteLine("*SEARCH");
+                        Console.WriteLine("-----------------------------------------------------");
                         line = file.ReadLine();
                         while (!line.StartsWith("*") && !file.EndOfStream)
                         {
@@ -104,7 +110,9 @@ namespace BPT.ParseInput
                     }
                     if (line == "*LIST")
                     {
-                        Console.WriteLine("\n*LIST");
+                        Console.WriteLine("-----------------------------------------------------");
+                        Console.WriteLine("*LIST");
+                        Console.WriteLine("-----------------------------------------------------");
                         try
                         {
                             List<String> keyList = tree.List();
@@ -123,12 +131,15 @@ namespace BPT.ParseInput
                     if (line == "*DELETE")
                     {
                         line = file.ReadLine();
+                        Console.WriteLine("-----------------------------------------------------");
+                        Console.WriteLine("*DELETE");
+                        Console.WriteLine("-----------------------------------------------------");
                         while (!file.EndOfStream && !line.StartsWith("*"))
                         {
                             if (line != "")
                             {
                                 String name = line;
-                                Console.WriteLine("\n*DELETE");
+                                
                                 try
                                 {
                                     tree.Delete(name);
@@ -151,12 +162,14 @@ namespace BPT.ParseInput
                         {
                             if (line != "")
                             {
+                                Console.WriteLine("-----------------------------------------------------");
+                                Console.WriteLine("*UPDATE");
+                                Console.WriteLine("-----------------------------------------------------");
                                 String name = line;
                                 String updateValue = file.ReadLine();
                                 try
                                 {
                                     tree.Update(name, updateValue);
-                                    Console.WriteLine("\n*UPDATE");
                                     Console.WriteLine(name + " Updated with value: " + updateValue);
                                 }
                                 catch (Exception e)
