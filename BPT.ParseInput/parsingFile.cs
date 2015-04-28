@@ -26,7 +26,7 @@ namespace BPT.ParseInput
                 System.IO.StreamReader file =
                 new System.IO.StreamReader(filePath);
                 line = file.ReadLine();
-                while (line!=null)
+                while (!file.EndOfStream)
                 {
                     if (line == "")
                     {
@@ -37,17 +37,13 @@ namespace BPT.ParseInput
                     {
                         Console.WriteLine("\n*INSERT");
                         line = file.ReadLine();
-<<<<<<< HEAD
-                        while ( !file.EndOfStream)
-=======
-                        while (!file.EndOfStream && !line.StartsWith("*"))
->>>>>>> 4185acd38afa12569c1fb16005647a0638b13d42
+                        while (!file.EndOfStream)
                         {
-                            if (line!=null)
+                            if (line != null)
                             {
                                 if (line.StartsWith("*")) break;
-                             
-                                if (line != "" && !line.StartsWith("*") )
+
+                                if (line != "" && !line.StartsWith("*"))
                                 {
                                     String name = line;
                                     try
@@ -61,7 +57,7 @@ namespace BPT.ParseInput
                                     }
                                 }
                             }
-                            
+
                             line = file.ReadLine();
                         }
                         continue;
@@ -72,17 +68,17 @@ namespace BPT.ParseInput
                         try
                         {
                             List<string> snapshotList = tree.Snapshot();
-                            Console.WriteLine("\nNumber of Records: " + snapshotList.ToArray()[0]+"\n");
-                            Console.WriteLine("Number of Blocks: " + snapshotList.ToArray()[1]+"\n");
-                            Console.WriteLine("Depth: " + snapshotList.ToArray()[2]+"\n");
-                            Console.WriteLine("First and Last keys of all internal B + Tree Nodes using Breadth First Search Traversal: ");
+                            Console.WriteLine("\nNumber of Records: " + snapshotList.ToArray()[0] + "\n");
+                            Console.WriteLine("Number of Blocks: " + snapshotList.ToArray()[1] + "\n");
+                            Console.WriteLine("Depth: " + snapshotList.ToArray()[2] + "\n");
+                            Console.WriteLine("First and Last keys of all internal B + Tree Nodes: ");
                             List<string> firstAndLast = tree.BFSTreeTraversal();
-                            foreach(string key in firstAndLast)
+                            foreach (string key in firstAndLast)
                             {
                                 Console.WriteLine(key);
                             }
                         }
-                        catch (Exception e) 
+                        catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
                         }
@@ -93,13 +89,13 @@ namespace BPT.ParseInput
                     {
                         Console.WriteLine("\n*SEARCH");
                         line = file.ReadLine();
-                        while ( !file.EndOfStream)
+                        while (!file.EndOfStream)
                         {
                             if (line != null)
                             {
                                 if (line.StartsWith("*")) break;
 
-                                if (line != "" && !line.StartsWith("*") )
+                                if (line != "" && !line.StartsWith("*"))
                                 {
                                     String name = line;
                                     try
@@ -113,7 +109,7 @@ namespace BPT.ParseInput
                                     }
                                 }
                             }
-                            
+
                             line = file.ReadLine();
                         }
                         continue;
@@ -139,17 +135,13 @@ namespace BPT.ParseInput
                     if (line == "*DELETE")
                     {
                         line = file.ReadLine();
-<<<<<<< HEAD
-                        while ( !file.EndOfStream)
-=======
-                        while (!file.EndOfStream && !line.StartsWith("*"))
->>>>>>> 4185acd38afa12569c1fb16005647a0638b13d42
+                        while (!file.EndOfStream)
                         {
-                            if (line!=null)
+                            if (line != null)
                             {
                                 if (line.StartsWith("*")) break;
 
-                                if (line != "" && !line.StartsWith("*") )
+                                if (line != "" && !line.StartsWith("*"))
                                 {
                                     String name = line;
                                     Console.WriteLine("\n*DELETE");
@@ -165,7 +157,7 @@ namespace BPT.ParseInput
 
                                 }
                             }
-                            
+
                             line = file.ReadLine();
                         }
                         continue;
@@ -173,14 +165,10 @@ namespace BPT.ParseInput
                     if (line == "*UPDATE")
                     {
                         line = file.ReadLine();
-<<<<<<< HEAD
                         //while (!line.StartsWith("*") && !file.EndOfStream)
                         while (!file.EndOfStream)
-=======
-                        while (!file.EndOfStream && !line.StartsWith("*") )
->>>>>>> 4185acd38afa12569c1fb16005647a0638b13d42
                         {
-                            if (line!=null)
+                            if (line != null)
                             {
                                 if (line.StartsWith("*")) break;
 
@@ -210,7 +198,6 @@ namespace BPT.ParseInput
                         Console.ReadLine();
                     }
                 }
-                file.Close();
                 Console.ReadLine();
 
             }
