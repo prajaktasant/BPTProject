@@ -26,7 +26,7 @@ namespace BPT.ParseInput
                 System.IO.StreamReader file =
                 new System.IO.StreamReader(filePath);
                 line = file.ReadLine();
-                while (!file.EndOfStream)
+                while (line!=null)
                 {
                     if (line == "")
                     {
@@ -37,7 +37,11 @@ namespace BPT.ParseInput
                     {
                         Console.WriteLine("\n*INSERT");
                         line = file.ReadLine();
+<<<<<<< HEAD
                         while ( !file.EndOfStream)
+=======
+                        while (!file.EndOfStream && !line.StartsWith("*"))
+>>>>>>> 4185acd38afa12569c1fb16005647a0638b13d42
                         {
                             if (line!=null)
                             {
@@ -71,7 +75,7 @@ namespace BPT.ParseInput
                             Console.WriteLine("\nNumber of Records: " + snapshotList.ToArray()[0]+"\n");
                             Console.WriteLine("Number of Blocks: " + snapshotList.ToArray()[1]+"\n");
                             Console.WriteLine("Depth: " + snapshotList.ToArray()[2]+"\n");
-                            Console.WriteLine("First and Last keys of all internal B + Tree Nodes: ");
+                            Console.WriteLine("First and Last keys of all internal B + Tree Nodes using Breadth First Search Traversal: ");
                             List<string> firstAndLast = tree.BFSTreeTraversal();
                             foreach(string key in firstAndLast)
                             {
@@ -135,7 +139,11 @@ namespace BPT.ParseInput
                     if (line == "*DELETE")
                     {
                         line = file.ReadLine();
+<<<<<<< HEAD
                         while ( !file.EndOfStream)
+=======
+                        while (!file.EndOfStream && !line.StartsWith("*"))
+>>>>>>> 4185acd38afa12569c1fb16005647a0638b13d42
                         {
                             if (line!=null)
                             {
@@ -165,8 +173,12 @@ namespace BPT.ParseInput
                     if (line == "*UPDATE")
                     {
                         line = file.ReadLine();
+<<<<<<< HEAD
                         //while (!line.StartsWith("*") && !file.EndOfStream)
                         while (!file.EndOfStream)
+=======
+                        while (!file.EndOfStream && !line.StartsWith("*") )
+>>>>>>> 4185acd38afa12569c1fb16005647a0638b13d42
                         {
                             if (line!=null)
                             {
@@ -198,6 +210,7 @@ namespace BPT.ParseInput
                         Console.ReadLine();
                     }
                 }
+                file.Close();
                 Console.ReadLine();
 
             }
