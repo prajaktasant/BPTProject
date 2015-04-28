@@ -26,7 +26,7 @@ namespace BPT.ParseInput
                 System.IO.StreamReader file =
                 new System.IO.StreamReader(filePath);
                 line = file.ReadLine();
-                while (line!=null)
+                while (!file.EndOfStream)
                 {
                     if (line == "")
                     {
@@ -37,21 +37,27 @@ namespace BPT.ParseInput
                     {
                         Console.WriteLine("\n*INSERT");
                         line = file.ReadLine();
-                        while (!file.EndOfStream && !line.StartsWith("*"))
+                        while (!file.EndOfStream)
                         {
-                            if (line != "")
+                            if (line != null)
                             {
-                                String name = line;
-                                try
+                                if (line.StartsWith("*")) break;
+
+                                if (line != "" && !line.StartsWith("*"))
                                 {
-                                    tree.Insert(name, new char[224]);
-                                    Console.WriteLine(name + " successfully Inserted");
-                                }
-                                catch (Exception e)
-                                {
-                                    Console.WriteLine(e.Message);
+                                    String name = line;
+                                    try
+                                    {
+                                        tree.Insert(name, new char[224]);
+                                        Console.WriteLine(name + " successfully Inserted");
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e.Message);
+                                    }
                                 }
                             }
+
                             line = file.ReadLine();
                         }
                         continue;
@@ -62,17 +68,17 @@ namespace BPT.ParseInput
                         try
                         {
                             List<string> snapshotList = tree.Snapshot();
-                            Console.WriteLine("\nNumber of Records: " + snapshotList.ToArray()[0]+"\n");
-                            Console.WriteLine("Number of Blocks: " + snapshotList.ToArray()[1]+"\n");
-                            Console.WriteLine("Depth: " + snapshotList.ToArray()[2]+"\n");
-                            Console.WriteLine("First and Last keys of all internal B + Tree Nodes using Breadth First Search Traversal: ");
+                            Console.WriteLine("\nNumber of Records: " + snapshotList.ToArray()[0] + "\n");
+                            Console.WriteLine("Number of Blocks: " + snapshotList.ToArray()[1] + "\n");
+                            Console.WriteLine("Depth: " + snapshotList.ToArray()[2] + "\n");
+                            Console.WriteLine("First and Last keys of all internal B + Tree Nodes: ");
                             List<string> firstAndLast = tree.BFSTreeTraversal();
-                            foreach(string key in firstAndLast)
+                            foreach (string key in firstAndLast)
                             {
                                 Console.WriteLine(key);
                             }
                         }
-                        catch (Exception e) 
+                        catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
                         }
@@ -83,21 +89,27 @@ namespace BPT.ParseInput
                     {
                         Console.WriteLine("\n*SEARCH");
                         line = file.ReadLine();
-                        while (!line.StartsWith("*") && !file.EndOfStream)
+                        while (!file.EndOfStream)
                         {
-                            if (line != "")
+                            if (line != null)
                             {
-                                String name = line;
-                                try
+                                if (line.StartsWith("*")) break;
+
+                                if (line != "" && !line.StartsWith("*"))
                                 {
-                                    String result = tree.Search(name);
-                                    Console.WriteLine("Name: " + name + "\tConfidential Information: " + result);
-                                }
-                                catch (Exception e)
-                                {
-                                    Console.WriteLine(e.Message);
+                                    String name = line;
+                                    try
+                                    {
+                                        String result = tree.Search(name);
+                                        Console.WriteLine("Name: " + name + "\tConfidential Information: " + result);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e.Message);
+                                    }
                                 }
                             }
+
                             line = file.ReadLine();
                         }
                         continue;
@@ -123,23 +135,29 @@ namespace BPT.ParseInput
                     if (line == "*DELETE")
                     {
                         line = file.ReadLine();
-                        while (!file.EndOfStream && !line.StartsWith("*"))
+                        while (!file.EndOfStream)
                         {
-                            if (line != "")
+                            if (line != null)
                             {
-                                String name = line;
-                                Console.WriteLine("\n*DELETE");
-                                try
-                                {
-                                    tree.Delete(name);
-                                    Console.WriteLine(name + " Deleted");
-                                }
-                                catch (Exception e)
-                                {
-                                    Console.WriteLine(e.Message);
-                                }
+                                if (line.StartsWith("*")) break;
 
+                                if (line != "" && !line.StartsWith("*"))
+                                {
+                                    String name = line;
+                                    Console.WriteLine("\n*DELETE");
+                                    try
+                                    {
+                                        tree.Delete(name);
+                                        Console.WriteLine(name + " Deleted");
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e.Message);
+                                    }
+
+                                }
                             }
+
                             line = file.ReadLine();
                         }
                         continue;
@@ -147,21 +165,27 @@ namespace BPT.ParseInput
                     if (line == "*UPDATE")
                     {
                         line = file.ReadLine();
-                        while (!file.EndOfStream && !line.StartsWith("*") )
+                        //while (!line.StartsWith("*") && !file.EndOfStream)
+                        while (!file.EndOfStream)
                         {
-                            if (line != "")
+                            if (line != null)
                             {
-                                String name = line;
-                                String updateValue = file.ReadLine();
-                                try
+                                if (line.StartsWith("*")) break;
+
+                                if (line != "" && !line.StartsWith("*"))
                                 {
-                                    tree.Update(name, updateValue);
-                                    Console.WriteLine("\n*UPDATE");
-                                    Console.WriteLine(name + " Updated with value: " + updateValue);
-                                }
-                                catch (Exception e)
-                                {
-                                    Console.WriteLine(e.Message);
+                                    String name = line;
+                                    String updateValue = file.ReadLine();
+                                    try
+                                    {
+                                        tree.Update(name, updateValue);
+                                        Console.WriteLine("\n*UPDATE");
+                                        Console.WriteLine(name + " Updated with value: " + updateValue);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e.Message);
+                                    }
                                 }
                             }
                             line = file.ReadLine();
@@ -174,7 +198,6 @@ namespace BPT.ParseInput
                         Console.ReadLine();
                     }
                 }
-                file.Close();
                 Console.ReadLine();
 
             }

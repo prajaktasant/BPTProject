@@ -18,3 +18,13 @@ C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.Proper
 C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.csproj.GenerateResource.Cache
 C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.exe
 C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.UI\obj\Debug\BPT.UI.pdb
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\obj\Debug\BPT.UI.exe
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\obj\Debug\BPT.UI.pdb
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\bin\Debug\BPT.UI.exe
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\bin\Debug\BPT.UI.pdb
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\bin\Debug\BPT.Implementation.dll
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\bin\Debug\BPT.Implementation.pdb
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\obj\Debug\BPT.UI.csprojResolveAssemblyReference.cache
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\obj\Debug\BPT.UI.Form1.resources
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\obj\Debug\BPT.UI.Properties.Resources.resources
+C:\localshare\project 2B+tree\BPTProject\BPT.UI\obj\Debug\BPT.UI.csproj.GenerateResource.Cache
