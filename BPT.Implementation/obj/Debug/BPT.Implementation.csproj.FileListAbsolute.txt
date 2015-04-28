@@ -8,3 +8,8 @@ C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.Implementation\bin\Debug\B
 C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.Implementation\obj\Debug\BPT.Implementation.csprojResolveAssemblyReference.cache
 C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.Implementation\obj\Debug\BPT.Implementation.dll
 C:\Swara_UOH\DatabaseSystems\Homework2\BPTProject\BPT.Implementation\obj\Debug\BPT.Implementation.pdb
+C:\localshare\project 2B+tree\BPTProject\BPT.Implementation\bin\Debug\BPT.Implementation.dll
+C:\localshare\project 2B+tree\BPTProject\BPT.Implementation\bin\Debug\BPT.Implementation.pdb
+C:\localshare\project 2B+tree\BPTProject\BPT.Implementation\obj\Debug\BPT.Implementation.csprojResolveAssemblyReference.cache
+C:\localshare\project 2B+tree\BPTProject\BPT.Implementation\obj\Debug\BPT.Implementation.dll
+C:\localshare\project 2B+tree\BPTProject\BPT.Implementation\obj\Debug\BPT.Implementation.pdb
