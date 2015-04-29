@@ -192,10 +192,10 @@ namespace BPT.Implementation
             --this.keyCount;
         }
 
-        protected override void performChildrenTransfer(BPlusTreeNode borrower, BPlusTreeNode lender, int borrowIndex)
-        {
-            throw new NotSupportedException();
-        }
+        //protected override void performChildrenTransfer(BPlusTreeNode borrower, BPlusTreeNode lender, int borrowIndex)
+        //{
+        //    throw new NotSupportedException();
+        //}
 
         protected override BPlusTreeNode performChildrenMerge(BPlusTreeNode leftChild, BPlusTreeNode rightChild)
         {

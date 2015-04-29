@@ -83,9 +83,9 @@ namespace BPT.Implementation
             int index = leafnode.search(key);
             if (index != -1)
             {
-                if (leafnode.delete(key) && leafnode.doesNodeUnderflow())
+                if (leafnode.delete(key) && leafnode.isNodeEmpty())
                 {
-                    BPlusTreeNode n = leafnode.handleUnderflow();
+                    BPlusTreeNode n = leafnode.dealWithEmptyNode();
                     if (n != null)
                         this.rootnode = n;
                 }
