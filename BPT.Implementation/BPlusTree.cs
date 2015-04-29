@@ -25,7 +25,8 @@ namespace BPT.Implementation
             {
                 BPlusTreeLeafNode leafnode = this.findTargetLeafNode(key);
                 int index = leafnode.search(key);
-                String value = val.ToString();
+                //String value = val.ToString();
+                String value = new String(val);
                 if (index == -1)
                 {
                     leafnode.insert(key, value);
@@ -213,28 +214,35 @@ namespace BPT.Implementation
         /// </summary>
         public List<string> BFSTreeTraversal()
         {
-            Queue<BPlusTreeInternalNode> q = new Queue<BPlusTreeInternalNode>();
-            List<string> firstAndLast = new List<string>();
-            int j = 0;
-            q.Enqueue((BPlusTreeInternalNode)this.rootnode);
+            if (!(this.rootnode.getNodeType() == BplusTreeNodeType.LeafNode))
             {
-                while (q.Count > 0)
+                Queue<BPlusTreeInternalNode> q = new Queue<BPlusTreeInternalNode>();
+                List<string> firstAndLast = new List<string>();
+                int j = 0;
+                q.Enqueue((BPlusTreeInternalNode)this.rootnode);
                 {
-                    BPlusTreeInternalNode n = q.Dequeue();
-                    firstAndLast.Add("B tree Node : " + j);
-                    j++;
-                    String first = n.getKey(0);
-                    firstAndLast.Add("First Key: "+first);
-                    String last = n.getKey(n.getKeyCount()-1);
-                    firstAndLast.Add("Last Key: "+last+"\n");
-                    for (int i = 0; i < n.getKeyCount() + 1; i++)
+                    while (q.Count > 0)
                     {
-                        if (n.getChild(i) != null && n.getChild(i).getNodeType() == BplusTreeNodeType.InternalNode)
-                            q.Enqueue((BPlusTreeInternalNode)n.getChild(i));
+                        BPlusTreeInternalNode n = q.Dequeue();
+                        firstAndLast.Add("B tree Node : " + j);
+                        j++;
+                        String first = n.getKey(0);
+                        firstAndLast.Add("First Key: " + first);
+                        String last = n.getKey(n.getKeyCount() - 1);
+                        firstAndLast.Add("Last Key: " + last + "\n");
+                        for (int i = 0; i < n.getKeyCount() + 1; i++)
+                        {
+                            if (n.getChild(i) != null && n.getChild(i).getNodeType() == BplusTreeNodeType.InternalNode)
+                                q.Enqueue((BPlusTreeInternalNode)n.getChild(i));
+                        }
                     }
                 }
+                return firstAndLast;
             }
-            return firstAndLast;
+            else
+            {
+                throw new Exception("There are no Internal B + Tree Nodes. Only Root Node in the tree");
+            }
         }
 
     }

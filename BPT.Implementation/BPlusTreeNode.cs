@@ -139,10 +139,11 @@ namespace BPT.Implementation
 
         /// <summary>
         /// Checks whether the sibling node can lend a key in case of underflow. The condition is different than normal B+ tree. 
-        /// The sibling node can lend a key if it has more than one key.
+        /// The sibling node can lend a key if it has more than one key as the underflow condition for a node is 0 keys in this 
+        /// Project.
         /// </summary>
         /// <returns></returns>
-        public bool checkIfLendAKey()
+        public bool checkIfSiblingCanLendKey() 
         {
             return this.getKeyCount() > 1;
         }
@@ -191,6 +192,14 @@ namespace BPT.Implementation
             return null;
         }
 
+        public abstract void mergeWithSibling(String dropKey, BPlusTreeNode rightSibling);
+
+        protected abstract void performChildrenTransfer(BPlusTreeNode borrowerNode, BPlusTreeNode lenderNode, int borrowIndex);
+
+        public abstract String transferFromSibling(String dropKey, BPlusTreeNode siblingNode, int borrowIndex);
+
+        protected abstract BPlusTreeNode performChildrenMerge(BPlusTreeNode leftChildNode, BPlusTreeNode rightChildNode);
+
         /// <summary>
         /// Handles th Underflow condition for the deletion operation. Borrows a key from left sibling or right sibling 
         /// if they can lend a key. 
@@ -198,18 +207,21 @@ namespace BPT.Implementation
         /// <returns></returns>
         public BPlusTreeNode handleUnderflow()
         {
+            //If the node is a root node
             if (this.getParent() == null)
                 return null;
 
+            //Check if left sibling exists and can lend a key.
             BPlusTreeNode leftSibling = this.getLeftSibling();
-            if (leftSibling != null && leftSibling.checkIfLendAKey())
+            if (leftSibling != null && leftSibling.checkIfSiblingCanLendKey())
             {
                 this.getParent().performChildrenTransfer(this, leftSibling, leftSibling.getKeyCount() - 1);
                 return null;
             }
 
+            //If there is no left sibling or if it cannot lend a key than check with the right sibling.
             BPlusTreeNode rightSibling = this.getRightSibling();
-            if (rightSibling != null && rightSibling.checkIfLendAKey())
+            if (rightSibling != null && rightSibling.checkIfSiblingCanLendKey())
             {
                 this.getParent().performChildrenTransfer(this, rightSibling, 0);
                 return null;
@@ -225,14 +237,6 @@ namespace BPT.Implementation
                 return this.getParent().performChildrenMerge(this, rightSibling);
             }
         }
-        public abstract void mergeWithSibling(String dropKey, BPlusTreeNode rightSibling);
-
-        protected abstract void performChildrenTransfer(BPlusTreeNode borrowerNode, BPlusTreeNode lenderNode, int borrowIndex);
-
-        public abstract String transferFromSibling(String dropKey, BPlusTreeNode siblingNode, int borrowIndex);
-
-        protected abstract BPlusTreeNode performChildrenMerge(BPlusTreeNode leftChildNode, BPlusTreeNode rightChildNode);
-
 
     }
 }

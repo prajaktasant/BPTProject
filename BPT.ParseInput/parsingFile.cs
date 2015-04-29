@@ -26,7 +26,7 @@ namespace BPT.ParseInput
                 System.IO.StreamReader file =
                 new System.IO.StreamReader(filePath);
                 line = file.ReadLine();
-                while (!file.EndOfStream)
+                while (!file.EndOfStream || line != null)
                 {
                     if (line == "")
                     {
@@ -39,7 +39,7 @@ namespace BPT.ParseInput
                         Console.WriteLine("*INSERT");
                         Console.WriteLine("--------------------------------------------------------------");
                         line = file.ReadLine();
-                        while (!file.EndOfStream)
+                        while (line != null || !file.EndOfStream)
                         {
                             if (line != null)
                             {
@@ -47,10 +47,10 @@ namespace BPT.ParseInput
 
                                 if (line != "" && !line.StartsWith("*"))
                                 {
-                                    String name = line;
+                                    String name = line.Trim();
                                     try
                                     {
-                                        tree.Insert(name, new char[224]);
+                                        tree.Insert(name, new char[224]);   //Initially inserts 224 empty characters as value.
                                         Console.WriteLine(name + " successfully Inserted");
                                     }
                                     catch (Exception e)
@@ -76,7 +76,7 @@ namespace BPT.ParseInput
                             Console.WriteLine("Number of Blocks: " + snapshotList.ToArray()[1] + "\n");
                             Console.WriteLine("Depth: " + snapshotList.ToArray()[2] + "\n");
                             Console.WriteLine("First and Last keys of all internal B + Tree Nodes in BFS traversal order: ");
-                            List<string> firstAndLast = tree.BFSTreeTraversal();
+                            List<string> firstAndLast = tree.BFSTreeTraversal(); //Call to BFS Traveral
                             foreach (string key in firstAndLast)
                             {
                                 Console.WriteLine(key);
@@ -95,7 +95,7 @@ namespace BPT.ParseInput
                         Console.WriteLine("*SEARCH");
                         Console.WriteLine("--------------------------------------------------------------");
                         line = file.ReadLine();
-                        while (!file.EndOfStream)
+                        while (line != null || !file.EndOfStream)
                         {
                             if (line != null)
                             {
@@ -103,7 +103,7 @@ namespace BPT.ParseInput
 
                                 if (line != "" && !line.StartsWith("*"))
                                 {
-                                    String name = line;
+                                    String name = line.Trim();
                                     try
                                     {
                                         String result = tree.Search(name);
@@ -146,7 +146,7 @@ namespace BPT.ParseInput
                         Console.WriteLine("--------------------------------------------------------------");
                         Console.WriteLine("*DELETE");
                         Console.WriteLine("--------------------------------------------------------------");
-                        while (!file.EndOfStream)
+                        while (line != null || !file.EndOfStream)
                         {
                             if (line != null)
                             {
@@ -154,7 +154,7 @@ namespace BPT.ParseInput
 
                                 if (line != "" && !line.StartsWith("*"))
                                 {
-                                    String name = line;
+                                    String name = line.Trim();
                                     try
                                     {
                                         tree.Delete(name);
@@ -179,7 +179,7 @@ namespace BPT.ParseInput
                         Console.WriteLine("--------------------------------------------------------------");
                         Console.WriteLine("*UPDATE");
                         Console.WriteLine("--------------------------------------------------------------");
-                        while (!file.EndOfStream)
+                        while (line != null || !file.EndOfStream)
                         {
                             if (line != null)
                             {
@@ -187,8 +187,8 @@ namespace BPT.ParseInput
 
                                 if (line != "" && !line.StartsWith("*"))
                                 {
-                                    String name = line;
-                                    String updateValue = file.ReadLine();
+                                    String name = line.Trim();
+                                    String updateValue = file.ReadLine().Trim();
                                     while (updateValue == "")
                                     {
                                         updateValue = file.ReadLine();
