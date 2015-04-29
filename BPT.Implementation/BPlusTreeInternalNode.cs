@@ -167,21 +167,21 @@ namespace BPT.Implementation
     /// <param name="borrower"></param>
     /// <param name="lender"></param>
     /// <param name="borrowIndex"></param>
-    //protected override void performChildrenTransfer(BPlusTreeNode borrower, BPlusTreeNode lenderNode, int borrowIndex) 
-    //{
-    //    int borrowerChildIndex = 0;
-    //    while (borrowerChildIndex < this.getKeyCount() + 1 && this.getChild(borrowerChildIndex) != borrower)
-    //        ++borrowerChildIndex;
+	protected override void performChildrenTransfer(BPlusTreeNode borrower, BPlusTreeNode lenderNode, int borrowIndex) 
+    {
+		int borrowerChildIndex = 0;
+		while (borrowerChildIndex < this.getKeyCount() + 1 && this.getChild(borrowerChildIndex) != borrower)
+			++borrowerChildIndex;
 		
-    //    if (borrowIndex == 0) {
-    //        String pushUpKey = borrower.transferFromSibling(this.getKey(borrowerChildIndex), lenderNode, borrowIndex);
-    //        this.setKey(borrowerChildIndex, pushUpKey);
-    //    }
-    //    else {
-    //        String pushUpKey = borrower.transferFromSibling(this.getKey(borrowerChildIndex - 1), lenderNode, borrowIndex);
-    //        this.setKey(borrowerChildIndex - 1, pushUpKey);
-    //    }
-    //}
+		if (borrowIndex == 0) {
+			String pushUpKey = borrower.transferFromSibling(this.getKey(borrowerChildIndex), lenderNode, borrowIndex);
+			this.setKey(borrowerChildIndex, pushUpKey);
+		}
+		else {
+			String pushUpKey = borrower.transferFromSibling(this.getKey(borrowerChildIndex - 1), lenderNode, borrowIndex);
+            this.setKey(borrowerChildIndex - 1, pushUpKey);
+		}
+	}
 
     public override String transferFromSibling(String dropKey, BPlusTreeNode sibling, int borrowIndex)
     {
@@ -216,7 +216,7 @@ namespace BPT.Implementation
 		String dropKey = this.getKey(index);		
 		leftChild.mergeWithSibling(dropKey, rightChild);		
 		this.deleteAt(index);
-				if (this.isNodeEmpty()) {
+				if (this.doesNodeUnderflow()) {
 			if (this.getParent() == null) {
 				if (this.getKeyCount() == 0) {
 					leftChild.setParent(null);
@@ -226,7 +226,7 @@ namespace BPT.Implementation
 					return null;
 				}
 			}			
-			return this.dealWithEmptyNode();
+			return this.handleUnderflow();
 		}
 		
 		return null;
