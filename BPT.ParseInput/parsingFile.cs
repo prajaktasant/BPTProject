@@ -51,7 +51,7 @@ namespace BPT.ParseInput
                                     try
                                     {
                                         tree.Insert(name, new char[224]);   //Initially inserts 224 empty characters as value.
-                                        Console.WriteLine(name + " successfully Inserted");
+                                        //Console.WriteLine(name + " successfully Inserted");
                                     }
                                     catch (Exception e)
                                     {

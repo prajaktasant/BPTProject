@@ -132,7 +132,7 @@ namespace BPT.Implementation
         /// The underflow occurs when there are zero keys in the node.
         /// </summary>
         /// <returns></returns>
-        public bool doesNodeUnderflow()
+        public bool isNodeEmpty()
         {
             return this.getKeyCount() == 0;
         }
@@ -205,7 +205,7 @@ namespace BPT.Implementation
         /// if they can lend a key. 
         /// </summary>
         /// <returns></returns>
-        public BPlusTreeNode handleUnderflow()
+        public BPlusTreeNode balanceTreeAfterDelete()
         {
             //If the node is a root node
             if (this.getParent() == null)

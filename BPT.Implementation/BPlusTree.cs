@@ -73,8 +73,8 @@ namespace BPT.Implementation
         }
 
         /// <summary>
-        /// Deletes the specified student record. The underflow condition and handling the underflow is different from the normal B+ trees.
-        /// The node is deleted only if it is empty. Underflow does not occur if there is atleat one key present in the leaf node.
+        /// Deletes the specified student record. It waits until there are zero keys in the node and then performs 
+        /// balancing of the tree.
         /// </summary>
         /// <param name="key"></param>
         public void Delete(String key)
@@ -83,9 +83,9 @@ namespace BPT.Implementation
             int index = leafnode.search(key);
             if (index != -1)
             {
-                if (leafnode.delete(key) && leafnode.doesNodeUnderflow())
+                if (leafnode.delete(key) && leafnode.isNodeEmpty())
                 {
-                    BPlusTreeNode n = leafnode.handleUnderflow();
+                    BPlusTreeNode n = leafnode.balanceTreeAfterDelete();
                     if (n != null)
                         this.rootnode = n;
                 }

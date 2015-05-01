@@ -216,7 +216,7 @@ namespace BPT.Implementation
 		String dropKey = this.getKey(index);		
 		leftChild.mergeWithSibling(dropKey, rightChild);		
 		this.deleteAt(index);
-				if (this.doesNodeUnderflow()) {
+				if (this.isNodeEmpty()) {
 			if (this.getParent() == null) {
 				if (this.getKeyCount() == 0) {
 					leftChild.setParent(null);
@@ -226,7 +226,7 @@ namespace BPT.Implementation
 					return null;
 				}
 			}			
-			return this.handleUnderflow();
+			return this.balanceTreeAfterDelete();
 		}
 		
 		return null;
