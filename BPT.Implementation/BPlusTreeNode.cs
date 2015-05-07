@@ -17,13 +17,13 @@ namespace BPT.Implementation
         public BPlusTreeNode leftSibling;   //left sibling of the current node
         public BPlusTreeNode rightSibling;  //right sibling of the current node
 
-        public BPlusTreeNode() 
+        public BPlusTreeNode()
         {
-		    this.keyCount = 0;
-		    this.parentNode = null;
-		    this.leftSibling = null;
-		    this.rightSibling = null;
-	    }
+            this.keyCount = 0;
+            this.parentNode = null;
+            this.leftSibling = null;
+            this.rightSibling = null;
+        }
 
         /// <summary>
         /// Returns the number of keys in a node.
@@ -33,7 +33,7 @@ namespace BPT.Implementation
         {
             return this.keyCount;
         }
-   
+
         /// <summary>
         /// Returns the key at the specified index
         /// </summary>
@@ -143,7 +143,7 @@ namespace BPT.Implementation
         /// Project.
         /// </summary>
         /// <returns></returns>
-        public bool checkIfSiblingCanLendKey() 
+        public bool checkIfSiblingCanLendKey()
         {
             return this.getKeyCount() > 1;
         }

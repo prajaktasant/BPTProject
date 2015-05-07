@@ -7,23 +7,26 @@ namespace BPT.Implementation
     public class BPlusTreeLeafNode : BPlusTreeNode
     {
         public static int LEAFNODEORDER = Constants.LEAF_ORDER; //Maximum number of keys a leaf Node can contain
-        public String[] values; // Data in the leaf node for the corressponding keys
+        public DataBlock[] values; // Reference to Data for the corressponding keys
+        private int[] sparseIndex = null;
 
         public BPlusTreeLeafNode()
         {
             this.keys = new String[LEAFNODEORDER + 1];
-            this.values = new String[LEAFNODEORDER + 1];
+            this.values = new DataBlock[LEAFNODEORDER + 1];
+            sparseIndex = new int[(int)Math.Ceiling((double)(LEAFNODEORDER / Constants.RECORDS_PER_BLOCK))];
         }
 
-        public String getValue(int index)
+        public DataBlock getValue(int index)
         {
-            return (String)this.values[index];
+            return (DataBlock)this.values[index];
         }
 
-        public void setValue(int index, String value)
+        public void setValue(int index, String key, String value)
         {
-            this.values[index] = value;
+            this.values[index] = new DataBlock(key, value);
         }
+
         public override BplusTreeNodeType getNodeType()
         {
             return BplusTreeNodeType.LeafNode;
@@ -77,15 +80,15 @@ namespace BPT.Implementation
             for (int i = this.getKeyCount() - 1; i >= index; --i)
             {
                 this.setKey(i + 1, this.getKey(i));
-                this.setValue(i + 1, this.getValue(i));
+                this.setValue(i + 1, this.getValue(i).getStudentName(), this.getValue(i).getStudentConfInformation());
             }
             this.setKey(index, key);
-            this.setValue(index, value);
+            this.setValue(index, key, value);
             ++this.keyCount;
         }
 
         /// <summary>
-        /// Splits the leaf node, the new key is pushed to pasent and also kept on the leaf node.
+        /// Splits the leaf node, the new key is pushed to parent and also kept on the leaf node.
         /// </summary>
         /// <returns></returns>
         protected override BPlusTreeNode splitNode()
@@ -96,9 +99,9 @@ namespace BPT.Implementation
             for (int i = midIndex; i < this.getKeyCount(); ++i)
             {
                 newRNode.setKey(i - midIndex, this.getKey(i));
-                newRNode.setValue(i - midIndex, this.getValue(i));
+                newRNode.setValue(i - midIndex, this.getValue(i).getStudentName(), this.getValue(i).getStudentConfInformation());
                 this.setKey(i, null);
-                this.setValue(i, null);
+                this.setValue(i, null, null);
             }
             newRNode.keyCount = this.getKeyCount() - midIndex;
             this.keyCount = midIndex;
@@ -124,23 +127,23 @@ namespace BPT.Implementation
             {
                 return false;
             }
-            this.setValue(index, value);
+            this.setValue(index, key, value);
             return true;
         }
 
         /// <summary>
-        /// Lists all the leaf node keys by traversing through next Right leaf nodes starting from the leftmost leaf node. 
+        /// Lists all the student names by traversing through next Right leaf nodes starting from the leftmost leaf node. 
         /// </summary>
         /// <returns></returns>
         public List<string> list()
         {
             List<string> keylist = new List<string>();
             BPlusTreeLeafNode nextnode = this;
-            while (nextnode!= null)
+            while (nextnode != null)
             {
                 for (int i = 0; i < nextnode.getKeyCount(); i++)
                 {
-                    keylist.Add(nextnode.getKey(i));
+                    keylist.Add(nextnode.getValue(i).getStudentName());
                 }
                 nextnode = (BPlusTreeLeafNode)nextnode.getNextRightLeafNode();
             }
@@ -155,7 +158,7 @@ namespace BPT.Implementation
             while (nextnode != null)
             {
                 double keyCount = nextnode.getKeyCount();
-                nodeBlocks = nodeBlocks + Math.Ceiling(System.Convert.ToDouble(keyCount / Constants.RECORDS_PER_BLOCK));             
+                nodeBlocks = nodeBlocks + Math.Ceiling(System.Convert.ToDouble(keyCount / Constants.RECORDS_PER_BLOCK));
                 nextnode = (BPlusTreeLeafNode)nextnode.getNextRightLeafNode();
             }
             return nodeBlocks;
@@ -185,10 +188,10 @@ namespace BPT.Implementation
             for (i = index; i < this.getKeyCount() - 1; ++i)
             {
                 this.setKey(i, this.getKey(i + 1));
-                this.setValue(i, this.getValue(i + 1));
+                this.setValue(i, this.getValue(i + 1).getStudentName(), this.getValue(i + 1).getStudentConfInformation());
             }
             this.setKey(i, null);
-            this.setValue(i, null);
+            this.setValue(i, null, null);
             --this.keyCount;
         }
 
@@ -210,7 +213,7 @@ namespace BPT.Implementation
             for (int i = 0; i < siblingLeaf.getKeyCount(); ++i)
             {
                 this.setKey(j + i, siblingLeaf.getKey(i));
-                this.setValue(j + i, siblingLeaf.getValue(i));
+                this.setValue(j + i, siblingLeaf.getValue(i).getStudentName(), siblingLeaf.getValue(i).getStudentConfInformation());
             }
             this.keyCount += siblingLeaf.getKeyCount();
 
@@ -224,12 +227,12 @@ namespace BPT.Implementation
         {
             BPlusTreeLeafNode siblingNode = (BPlusTreeLeafNode)sibling;
 
-            this.insert(siblingNode.getKey(borrowIndex), siblingNode.getValue(borrowIndex));
+            this.insert(siblingNode.getKey(borrowIndex), siblingNode.getValue(borrowIndex).getStudentConfInformation());
             siblingNode.deleteAt(borrowIndex);
 
             return borrowIndex == 0 ? sibling.getKey(0) : this.getKey(0);
         }
 
     }
-      
+
 }

@@ -16,7 +16,6 @@ namespace BPT.ParseInput
         {
 
             open(userInput);
-
         }
         public void open(string filePath)
         {
@@ -51,7 +50,7 @@ namespace BPT.ParseInput
                                     try
                                     {
                                         tree.Insert(name, new char[224]);   //Initially inserts 224 empty characters as value.
-                                        //Console.WriteLine(name + " successfully Inserted");
+                                        Console.WriteLine(name + " successfully Inserted");
                                     }
                                     catch (Exception e)
                                     {
@@ -106,8 +105,8 @@ namespace BPT.ParseInput
                                     String name = line.Trim();
                                     try
                                     {
-                                        String result = tree.Search(name);
-                                        Console.WriteLine("Name: " + name + "\tConfidential Information: " + result);
+                                        DataBlock result = tree.Search(name);
+                                        Console.WriteLine("Name: " + result.getStudentName() + "\tConfidential Information: " + result.getStudentConfInformation());
                                     }
                                     catch (Exception e)
                                     {
@@ -197,7 +196,7 @@ namespace BPT.ParseInput
                                     {
                                         tree.Update(name, updateValue);
                                         
-                                        Console.WriteLine(name + " Updated with value: " + updateValue);
+                                        Console.WriteLine(name + " Updated with information: " + updateValue);
                                     }
                                     catch (Exception e)
                                     {
@@ -215,6 +214,7 @@ namespace BPT.ParseInput
                         Console.ReadLine();
                     }
                 }
+                Console.WriteLine("\nPlease press Enter to exit");
                 Console.ReadLine();
 
             }

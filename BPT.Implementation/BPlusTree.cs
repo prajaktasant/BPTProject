@@ -7,10 +7,12 @@ namespace BPT.Implementation
     public class BPlusTree
     {
         private BPlusTreeNode rootnode;
+        int record;
 
         public BPlusTree()
         {
             this.rootnode = new BPlusTreeLeafNode();
+            record = 0;
         }
 
         /// <summary>
@@ -25,12 +27,11 @@ namespace BPT.Implementation
             {
                 BPlusTreeLeafNode leafnode = this.findTargetLeafNode(key);
                 int index = leafnode.search(key);
-                //String value = val.ToString();
                 String value = new String(val);
                 if (index == -1)
                 {
                     leafnode.insert(key, value);
-
+                    record++;
                     if (leafnode.doesNodeOverflow())
                     {
                         BPlusTreeNode n = leafnode.handleOverflow();
@@ -41,13 +42,13 @@ namespace BPT.Implementation
 
                 else
                 {
-                    throw new Exception(key+" already present. Cannot insert same key");
+                    throw new Exception(key + " already present. Cannot insert same key");
                 }
             }
 
             else
             {
-                throw new Exception(key+" cannot be inserted. Key cannot have more than 32 characters");
+                throw new Exception(key + " cannot be inserted. Key cannot have more than 32 characters");
             }
 
         }
@@ -57,18 +58,19 @@ namespace BPT.Implementation
         /// </summary>
         /// <param name="key">student name</param>
         /// <returns>Confidential Information if Present else empty string</returns>
-        public String Search(String key)
+        public DataBlock Search(String key)
         {
 
             BPlusTreeLeafNode leafnode = this.findTargetLeafNode(key);
             int index = leafnode.search(key);
             if (index == -1)
             {
-                throw new Exception(key+" not found");
+                throw new Exception(key + " not found");
             }
             else
             {
-                return leafnode.getValue(index);
+                //return leafnode.getValue(index);
+                return (DataBlock)leafnode.getValue(index);
             }
         }
 
@@ -83,16 +85,20 @@ namespace BPT.Implementation
             int index = leafnode.search(key);
             if (index != -1)
             {
-                if (leafnode.delete(key) && leafnode.isNodeEmpty())
+                if (leafnode.delete(key))
                 {
-                    BPlusTreeNode n = leafnode.balanceTreeAfterDelete();
-                    if (n != null)
-                        this.rootnode = n;
+                    record--;
+                    if (leafnode.isNodeEmpty())
+                    {
+                        BPlusTreeNode n = leafnode.balanceTreeAfterDelete();
+                        if (n != null)
+                            this.rootnode = n;
+                    }
                 }
             }
             else
             {
-                throw new Exception(key+ " not found");
+                throw new Exception(key + " not found");
             }
         }
 
@@ -144,13 +150,13 @@ namespace BPT.Implementation
         }
 
         /// <summary>
-        /// Returns the depth of the tree.
+        /// Returns the depth of the tree starting from the root node. Root Node is considered at depth 1.
         /// </summary>
         /// <returns></returns>
         private int getDepth()
         {
             BPlusTreeNode node = this.rootnode;
-            int count = 1;
+            int count = 1; // Root node at depth 1
             while (node.getNodeType() == BplusTreeNodeType.InternalNode)
             {
                 node = ((BPlusTreeInternalNode)node).getChild(0);
@@ -165,7 +171,7 @@ namespace BPT.Implementation
         /// <returns></returns>
         private int getNumberOfRecords()
         {
-            return List().Count;
+            return record;
         }
 
         /// <summary>
@@ -224,7 +230,7 @@ namespace BPT.Implementation
                     while (q.Count > 0)
                     {
                         BPlusTreeInternalNode n = q.Dequeue();
-                        firstAndLast.Add("B tree Node : " + j);
+                        firstAndLast.Add("B plus tree Internal Node : " + j);
                         j++;
                         String first = n.getKey(0);
                         firstAndLast.Add("First Key: " + first);
@@ -244,7 +250,6 @@ namespace BPT.Implementation
                 throw new Exception("There are no Internal B + Tree Nodes. Only Root Node in the tree");
             }
         }
-
     }
 }
 

@@ -12,8 +12,6 @@ namespace BPT.ParseInput
             Console.WriteLine("Please input the file path ");
             string filepath;
             filepath = Console.ReadLine() ;
-            //filepath = "C:\\localshare\\project 2B+tree\\input.txt";
-
             parsingFile file1 = new parsingFile(filepath);
 
         }
